@@ -1,0 +1,124 @@
+body {
+    background-color: rgb(104, 197, 252);
+    box-shadow: inset 0 0 100vmin #000000c4;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0.05em 0.1em 0 #000, 0 0.1em 0.15em #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    direction: rtl;
+    font-weight: 700;
+}
+
+dice {
+    --size: 5em;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    color: rgb(245, 245, 245);
+    background-color: currentColor;
+    border-radius: calc(var(--size) / 10);
+    box-shadow: calc(var(--size) / 24) calc(var(--size) / 15) 0 calc(var(--size) / 28) rgba(0, 0, 0, 0.25),
+        calc(var(--size) / 24) calc(var(--size) / 15) 0 calc(var(--size) / 28) currentColor,
+        calc(var(--size) / 24) calc(var(--size) / 15) calc(var(--size) / 5) calc(var(--size) / 28) rgba(0, 0, 0, 0.5);
+    margin: calc(var(--size) / 5);
+
+    text-align: center;
+    line-height: var(--size);
+    cursor: pointer;
+    transition: 0.2s;
+    transform-origin: center;
+    animation-timing-function: cubic-bezier(0.59, -0.26, 0.37, 1.39);
+    animation-delay: 1s;
+}
+
+dice[rolling] {
+    box-shadow: calc(var(--size) / 24) calc(var(--size) / 15) 0 calc(var(--size) / 28) rgba(0, 0, 0, 0.25),
+        calc(var(--size) / 24) calc(var(--size) / 15) 0 calc(var(--size) / 28) currentColor,
+        calc(var(--size) / 24) calc(var(--size) / 4) calc(var(--size) / 4) calc(var(--size) / 40) rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    animation: infinite shake 1s alternate;
+}
+
+dice[rolling]:nth-child(2n) {
+    animation: infinite shake 1s alternate-reverse;
+}
+
+dice:hover {
+    transform: scale(1.1);
+}
+
+dice:active {
+    color: orange
+}
+
+dice::after {
+    color: #000;
+    display: block;
+    width: inherit;
+    height: inherit;
+    font-size: var(--size);
+    content: attr(value);
+}
+
+dice[value="1"]::after {
+    content: "⠐";
+    transform: translateY(5%) translateX(-10%);
+}
+
+dice[value="2"]::after {
+    content: "⠡";
+}
+
+dice[value="3"]::after {
+    content: "⠕";
+}
+
+dice[value="4"]::after {
+    content: "⠛";
+    transform: translateY(18%);
+}
+
+dice[value="5"]::after {
+    content: "⠾";
+}
+
+dice[value="6"]::after {
+    content: "⠿";
+}
+
+@keyframes shake {
+
+    10%,
+    80% {
+        transform: translate(5%, 5%) rotate(2deg);
+    }
+
+    20%,
+    70% {
+        transform: translate(-5%, -5%) rotate(-2deg);
+    }
+
+    30%,
+    60% {
+        transform: translate(-5%, 2%) rotate(1deg);
+    }
+
+    40%,
+    90% {
+        transform: translate(5%, -5%) rotate(-1deg);
+    }
+
+    0%,
+    50% 100% {
+        transform: translate(0, 0);
+    }
+}
